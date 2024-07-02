@@ -4,15 +4,22 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { CreateTODO} from '../component/Createtodo'
 import {UpdateTODO }  from '../component/Updatetodo'
+import { Todos } from '../component/Todos'
  
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, settodos] = useState([])
+
+  fetch("https://port3123-workspaces-ws-7zqdt.eu20.applicationstudio.cloud.sap/todos").then(async function(res){
+  const json = res.json();
+  settodos(json.todos)
+  })
 
   return (
     <div>
 
       <CreateTODO></CreateTODO>
       <UpdateTODO></UpdateTODO>
+      <Todos todos= {todos}></Todos>
 
     </div>
   )
